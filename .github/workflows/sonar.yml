@@ -14,7 +14,7 @@ jobs:
       with:
        version: 4.7.0.2747-windows
     - name: SonarQube Scan
-      uses: sonarqube-action@v1.1.0
+      uses: kitabisa/sonarqube-action@v1.1.0
       with:
          host:  http://8635-14-98-199-230.ngrok.io
          login: 1e12cda579eb3656120f9b7407955b3327d68c25
