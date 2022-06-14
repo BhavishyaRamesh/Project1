@@ -35,5 +35,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ./**/*.pptx         
-          tag_name: v0.0.1${{ github.run_number }}
-          name: Release V0.0.1${{ github.run_number }}
+          tag_name: v0.0.0${{ github.run_number }}
+          name: Release V0.0.0${{ github.run_number }}
