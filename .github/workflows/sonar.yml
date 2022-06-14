@@ -4,14 +4,14 @@ on:
     branches:
       - master 
 jobs:
-  build:
-    name: Build
+  sonarQubeTrigger:
+    name: SonarQube Trigger
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@master
-     - name: SonarQube Scan
-       uses: kitabisa/sonarqube-action@v1.1.0
-       with:
-         host:  https://8635-14-98-199-230.ngrok.io
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@v1.1.0
+      with:
+         host:  http://8635-14-98-199-230.ngrok.io
          login: 1e12cda579eb3656120f9b7407955b3327d68c25
     
