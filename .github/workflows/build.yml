@@ -37,15 +37,19 @@ jobs:
           files: ./**/*.pptx         
           tag_name: v0.0.0${{ github.run_number }}
           name: Release V0.0.0${{ github.run_number }}
-      - name: Rollback Release
-        if: failure()
-        uses: author/action-rollback@stable
-        with:
+          release-content:
+            name: 'Create GitHub Release'
+            runs-on: ubuntu-latest
+            steps:
+            - name: Rollback Release
+              if: failure()
+              uses: author/action-rollback@stable
+              with:
     # Using a known release ID
-          release_id: 85f04d1
+                release_id: 85f04d1
     # Using a tag name
-          tag: 'v0.0.04'
+                tag: 'v0.0.04'
     #  If the release does not exist but the tag does, setting this to true will remove the tag.
-          delete_orphan_tag: true
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                delete_orphan_tag: true
+               env:
+                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
