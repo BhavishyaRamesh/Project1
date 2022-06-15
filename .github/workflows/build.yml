@@ -26,7 +26,7 @@ jobs:
      needs: [ build-pptx ]
      steps:
        - name: Rollback Release
-         if: failure()
+         if: failure() && steps.create_release.outputs.id != '85f04d1'
          uses: author/action-rollback@stable
          with:
             release_id: 85f04d1
