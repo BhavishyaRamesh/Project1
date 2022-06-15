@@ -37,3 +37,15 @@ jobs:
           files: ./**/*.pptx         
           tag_name: v0.0.0${{ github.run_number }}
           name: Release V0.0.0${{ github.run_number }}
+      - name: Rollback Release
+        if: failure()
+        uses: author/action-rollback@stable
+        with:
+    # Using a known release ID
+          release_id: 
+    # Using a tag name
+          tag: 'v0.0.4'
+    #  If the release does not exist but the tag does, setting this to true will remove the tag.
+          delete_orphan_tag: true
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
