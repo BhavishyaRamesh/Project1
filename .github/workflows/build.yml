@@ -8,12 +8,12 @@ jobs:
     name: 'Build PowerPoint Presentation'
     runs-on: ubuntu-latest
     container:
-      image: seesharprun/pandoc-build
+      image: /pandoc-build
     steps:
       - name: 'Checkout Code'
         uses: actions/checkout@v2
       - name: 'Run Pandoc Builds'
-        run: ls | grep '.md' | xargs basename -s '.md' | xargs -I % sh -c "pandoc %.md --standalone --slide-level=3 --reference-doc=../.production/template.pptx --variable=monofont:'Cascadia Code' --output %-v${{ github.run_number }}.pptx"
+        run: ls | grep '.md' | xargs basename -s '.md' | xargs -I % sh -c "pandoc %.md --standalone --slide-level=3 --reference-doc=../.production/template.pptx --variable=monofont:'Cascadia Code' --output %-v0.0.${{ github.run_number }}.pptx"
         working-directory: ./presentations
       - name: 'Upload Presentation Artifacts'
         uses: actions/upload-artifact@v2
@@ -35,8 +35,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ./**/*.pptx         
-          tag_name: v0.0.0${{ github.run_number }}
-          name: Release V0.0.0${{ github.run_number }}
+          tag_name: v0.0.${{ github.run_number }}
+          name: Release V0.0.${{ github.run_number }}
   rollback-content:
      name: 'Rollback the release'
      runs-on: ubuntu-latest
