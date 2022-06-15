@@ -37,16 +37,16 @@ jobs:
           files: ./**/*.pptx         
           tag_name: v0.0.0${{ github.run_number }}
           name: Release V0.0.0${{ github.run_number }}
-           release-content:
-            name: 'Rollback the release'
-            runs-on: ubuntu-latest
-            steps:
-            - name: Rollback Release
-              if: failure()
-              uses: author/action-rollback@stable
-              with:
-                release_id: 85f04d1
-                tag: 'v0.0.04'
-                delete_orphan_tag: true
-               env:
-                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  rollback-content:
+     name: 'Rollback the release'
+     runs-on: ubuntu-latest
+     steps:
+       - name: Rollback Release
+         if: failure()
+         uses: author/action-rollback@stable
+         with:
+            release_id: 85f04d1
+            tag: 'v0.0.04'
+            delete_orphan_tag: true
+         env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
