@@ -20,6 +20,19 @@ jobs:
         with:
           name: presentations
           path: ./presentations/*.pptx
+  rollback-content:
+     name: 'Rollback the release'
+     runs-on: ubuntu-latest
+     steps:
+       - name: Rollback Release
+         if: failure()
+         uses: author/action-rollback@stable
+         with:
+            release_id: 85f04d1
+            tag: 'v0.0.04'
+            delete_orphan_tag: true
+         env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release-content:
     name: 'Create GitHub Release'
     runs-on: ubuntu-latest
@@ -37,16 +50,4 @@ jobs:
           files: ./**/*.pptx         
           tag_name: v0.0.${{ github.run_number }}
           name: Release V0.0.${{ github.run_number }}
-  rollback-content:
-     name: 'Rollback the release'
-     runs-on: ubuntu-latest
-     steps:
-       - name: Rollback Release
-         if: failure()
-         uses: author/action-rollback@stable
-         with:
-            release_id: 85f04d1
-            tag: 'v0.0.04'
-            delete_orphan_tag: true
-         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
