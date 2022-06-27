@@ -2,13 +2,14 @@ name: QA
 on: push
 jobs:
   run_qa:
+    name: sonar
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: ./test/run-qa.sh
-          timeout-minutes: 5
+        timeout-minutes: 5
     services:
       sonarqube:
          image: sonarqube:8.9-community
